@@ -1,49 +1,50 @@
-function saveData(){
-    let product_name=document.getElementById("product_name")
-    let product_quantity=document.getElementById("product_quantity");
-    let product_name1=product_name.value;
-    let product_quantity1=product_quantity.value
-    product_name.value='';
-    product_quantity.value='';
-    console.log(product_name1,product_quantity1)
-    showData(product_name1,product_quantity1)
-    saveDataLocalStorage(product_name1,product_quantity1)
+const bringData=()=>{
+    const productName=document.getElementById("product_name")
+    const product_Quantity=document.getElementById("product_quantity")
+    let product_name_value=productName.value;
+    let product_Quantity_value=product_Quantity.value;
+    productName.value=''
+    product_Quantity.value=''
+    console.log(product_name_value,product_Quantity_value)
+    display(product_name_value,product_Quantity_value)
+    saveDataLocalStorage(product_name_value,product_Quantity_value)
 }
-const showData=(x,y)=>{
-    let ul=document.getElementById("ul")
-    let li=document.createElement("li")
-    li.innerHTML=`
-    ${x}=${y}
+
+function display(product_name,product_Quantity){
+    const container=document.getElementById("ul")
+    const create_li=document.createElement("li")
+    create_li.innerHTML=`
+    ${product_name}=${product_Quantity}
+
     `
-    ul.appendChild(li)
-
+    container.appendChild(create_li)
 }
-const getSoreCart=()=>{
-    let card={}
-    let find_data=localStorage.getItem("card")
-    if(find_data){
-      card=JSON.parse(find_data);
+
+function getDataFromStorage(){
+    let cart={}
+    const find_cart=localStorage.getItem("cart")
+    if(find_cart){
+        cart=JSON.parse(find_cart)
     }
-    return card
+    return cart
 
 }
-const saveDataLocalStorage=(product_name,product_quantity)=>{
-    const Data=getSoreCart()
-    Data[product_name]=product_quantity
-    const convert=JSON.stringify(Data)
-    console.log(convert)
-    
-    localStorage.setItem("card",convert)
-   
+function saveDataLocalStorage(product_name,product_quantity){
+    let find_the_data=getDataFromStorage()
+    find_the_data[product_name]=product_quantity
+    console.log(find_the_data)
+    let convert=JSON.stringify(find_the_data)
+    localStorage.setItem("cart",convert)
 
 }
-function showSaveData(){
-    const load_data=getSoreCart()
-    console.log(load_data)
-    for(let product in load_data){
-        const quantity=load_data[product]
-        console.log(product,quantity)
-        showData(product,quantity)
+
+function displaySaveData(){
+    let find_the_data=getDataFromStorage()
+    for(let product_name in find_the_data){
+        let product_quantity=find_the_data[product_name]
+        console.log(product_name,product_quantity)
+        display(product_name,product_quantity)
     }
+
 }
-showSaveData()
+displaySaveData()

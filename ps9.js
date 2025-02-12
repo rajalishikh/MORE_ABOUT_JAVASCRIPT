@@ -1,7 +1,6 @@
-let num=[2,4,8,12]
+let tt='bushra'
+let age="222"
 
-let item=num.forEach((a)=>{
-    console.log(a)
-
-})
-console.log(num)
+let x={raj:22}
+x[tt]=age
+console.log(x)

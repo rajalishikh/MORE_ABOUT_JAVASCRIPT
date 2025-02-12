@@ -32,6 +32,18 @@ const saveDataLocalStorage=(product_name,product_quantity)=>{
     Data[product_name]=product_quantity
     const convert=JSON.stringify(Data)
     console.log(convert)
+    
     localStorage.setItem("card",convert)
+   
 
 }
+function showSaveData(){
+    const load_data=getSoreCart()
+    console.log(load_data)
+    for(let product in load_data){
+        const quantity=load_data[product]
+        console.log(product,quantity)
+        showData(product,quantity)
+    }
+}
+showSaveData()
